@@ -18,6 +18,8 @@ app.controller('SharingController', ['$http', function ($http) {
       experience: ctrl.newExperience
     }).then(function (success) {
       ctrl.experiences.push(success.data.experience);
+      ctrl.newExperience.location = ""
+      ctrl.newExperience.description = ""
     }, function (err) {
       console.log("error", err);
     });
@@ -34,10 +36,25 @@ app.controller('SharingController', ['$http', function ($http) {
   };
 
   this.deleteExperience = function (experience) {
-    $http.delete('/experiences' + experience._id)
+    $http.delete('/experiences/' + experience._id)
     .then(function (success) {
       var i = ctrl.experiences.indexOf(experience);
       ctrl.experiences.splice(i, 1);
+    }, function (err) {
+      console.log("error", err);
+    });
+  };
+
+  this.addCommentToExperience = function (experience) {
+    experience.newComment.name = experience.newComment.name || "anonymous";
+
+    experience.comments.push(experience.newComment);
+
+    $http.patch('/experiences/' + experience._id, {
+      experience: experience
+    }).then(function (success) {
+      experience.newComment = {};
+      console.log(success);
     }, function (err) {
       console.log("error", err);
     });

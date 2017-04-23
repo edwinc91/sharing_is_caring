@@ -71,7 +71,7 @@ server.patch('/experiences/:id', function (req, res) {
 });
 
 server.delete('/experiences/:id', function (req, res) {
-  Experience.findByIdAndRemove(req.params.id, function (err, experience) {
+  Experience.findByIdAndRemove(req.params.id, function (error, experience) {
     if (error) {
       console.log("error", error);
     } else {

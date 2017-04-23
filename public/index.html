@@ -5,18 +5,39 @@
     <title>ShareCare</title>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+    <link rel="stylesheet" href="stylesheets/styles.css">
   </head>
   <body ng-app="ShareCare">
+    <div class="container">
+      <!-- <div class="card-panel teal lighten-2"> -->
     <main ng-controller="SharingController as shareCtrl">
-      <h3>
-        Am I sharing because I care? Or do I share to receive some care..?
-      </h3>
+      <h4>
+        Welcome to Sharing is Caring, share your experiences here!
+      </h4>
 
-      <form ng-submit="shareCtrl.createExperience()">
-        <input placeholder="location" ng-model="shareCtrl.newExperience.location"><br/>
-        <textarea placeholder="What Happened" ng-model="shareCtrl.newExperience.description"></textarea><br/>
-        <input type="submit">
+      <div class="row">
+      <form ng-submit="shareCtrl.createExperience()" class="col s12">
+        <div class="row">
+          <div class="input-field col s12">
+        <input placeholder="e.g. 42nd and 8th" ng-model="shareCtrl.newExperience.location"
+               id="location" type="text">
+        <label for="location"> Location </label>
+      </div>
+      </div>
+        <div class="row">
+          <div class="input-field col s12">
+        <textarea ng-model="shareCtrl.newExperience.description"
+                  class="materialize-textarea" id="description"></textarea>
+                  <label for="description"> What Happened? </label>
+      </div>
+        <input type="submit" class="waves-effect waves-light btn">
       </form>
+    </div>
 
       <hr/>
       <ul>
@@ -29,15 +50,39 @@
           <button ng-click="shareCtrl.currentExperience=experience">
             Change this share
           </button>
+
           <form ng-submit="shareCtrl.updateExperience()"
             ng-show="shareCtrl.currentExperience==experience">
             <input placeholder="location" ng-model="shareCtrl.currentExperience.location"><br/>
             <textarea placeholder="What Happened" ng-model="shareCtrl.currentExperience.description"></textarea><br/>
             <input type="submit">
           </form>
+
+          <div class="row">
+          <div class="col s11 offset-s1">
+          <ul ng-show="experience.comments.length > 0">
+            <li ng-repeat="comment in experience.comments">
+              {{comment.reaction}} - {{comment.name}}
+            </li>
+          </ul>
+        </div>
+
+        <div class="col s10 push-s1">
+          <form ng-submit="shareCtrl.addCommentToExperience(experience)">
+            <input placeholder="React"
+                    ng-model="experience.newComment.reaction">
+            <input placeholder="Name"
+                    ng-model="experience.newComment.name">
+            <input type="submit">
+          </form>
+        </div>
+      </div>
+
         </li>
       </ul>
 
+    <!-- </div> -->
+    </div>
     </main>
     <script src="js/app.js"></script>
   </body>
