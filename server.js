@@ -4,7 +4,8 @@ var express         = require('express'),
     Schema          = mongoose.Schema,
     bodyParser      = require('body-parser'),
     methodOverride  = require('method-override'),
-    MONGOURI        = 'mongodb://heroku_fkk0sjb7:nvd9jnrkt9plv5q3m60vgmcdjl@ds119081.mlab.com:19081/heroku_fkk0sjb7' || "mongodb://localhost:27017";
+    MONGOURI        = 'mongodb://heroku_fkk0sjb7:nvd9jnrkt9plv5q3m60vgmcdjl@ds119081.mlab.com:19081/heroku_fkk0sjb7' || "mongodb://localhost:27017",
+    PORT            = process.env.PORT || 3000;
 
 var experienceSchema = new Schema({
   location: { type: String, required: true },
@@ -83,6 +84,6 @@ server.delete('/experiences/:id', function (req, res) {
   });
 });
 
-server.listen(3000, function() {
+server.listen(PORT, function() {
   console.log("server running...");
 });
