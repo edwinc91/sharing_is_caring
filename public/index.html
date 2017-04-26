@@ -17,9 +17,9 @@
     <div class="container">
       <!-- <div class="card-panel teal lighten-2"> -->
     <main ng-controller="SharingController as shareCtrl">
-      <h4>
-        Welcome to Sharing is Caring, share your experiences here!
-      </h4>
+      <span class="header-title">
+        Welcome to Sharing is Caring, share anything you want here!
+      </span>
 
       <div class="row">
         <form ng-submit="shareCtrl.createExperience()" class="col s12">
@@ -46,7 +46,8 @@
         <li ng-repeat="experience in shareCtrl.experiences">
           <div class="row">
             <div class="col s10">
-              <h5> {{experience.location}} </h5>
+              <span class="location-names"> {{experience.location}} </span><br/>
+              {{experience.description}}
             </div>
             <div class="col s2">
               <button ng-click="shareCtrl.deleteExperience(experience)" class="red darken-1 btn-floating">
@@ -60,9 +61,6 @@
                       class="btn-floating tooltipped waves-light waves-effect" data-position="top" data-delay="50" data-tooltip="React">
                 <i class="material-icons">comment</i>
               </button>
-            </div>
-            <div class="col s12">
-              {{experience.description}}
             </div>
           </div>
 
@@ -95,7 +93,7 @@
           <div class="row">
             <div class="col s11 offset-s1">
               <ul ng-show="experience.comments.length > 0">
-                <span> reactions </span>
+                <span class="reaction-title"> Reactions </span>
                 <li ng-repeat="comment in experience.comments">
                   {{comment.reaction}} - {{comment.name}}
                 </li>
@@ -107,7 +105,7 @@
                 ng-show="shareCtrl.reactExperience==experience">
             <input placeholder="React"
                     ng-model="experience.newComment.reaction">
-            <input placeholder="Name"
+            <input placeholder="Name (Default is Anonymous)"
                     ng-model="experience.newComment.name">
             <button type="submit" class="waves-effect waves-light btn" name="action">React</button>
           </form>
