@@ -4,9 +4,7 @@ var express         = require('express'),
     Schema          = mongoose.Schema,
     bodyParser      = require('body-parser'),
     methodOverride  = require('method-override'),
-    MONGOURI        = process.env.MONGOLAB_URI || "mongodb://localhost:27017",
-    PORT            = process.env.PORT || 3000,
-    dbname          = "sharing_is_caring";
+    MONGOURI        = 'mongodb://heroku_fkk0sjb7:nvd9jnrkt9plv5q3m60vgmcdjl@ds119081.mlab.com:19081/heroku_fkk0sjb7' || "mongodb://localhost:27017";
 
 var experienceSchema = new Schema({
   location: { type: String, required: true },
@@ -19,7 +17,7 @@ var experienceSchema = new Schema({
 }, {collection: 'Experience', strict: true});
 var Experience = mongoose.model(null, experienceSchema);
 
-mongoose.connect(MONGOURI + '/' + dbname);
+mongoose.connect(MONGOURI);
 
 server.use(express.static('public'));
 server.use(bodyParser.urlencoded({
@@ -85,6 +83,6 @@ server.delete('/experiences/:id', function (req, res) {
   });
 });
 
-server.listen(PORT, function() {
+server.listen(3000, function() {
   console.log("server running...");
 });
