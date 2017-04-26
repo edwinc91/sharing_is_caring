@@ -6,8 +6,8 @@ var express         = require('express'),
     methodOverride  = require('method-override');
 
 var experienceSchema = new Schema({
-  location: String,
-  description: String,
+  location: { type: String, required: true },
+  description: { type: String, required: true },
   date: { type: Date, default: Date.now },
   comments: [{
     name: String,
