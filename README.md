@@ -6,7 +6,7 @@ to other people where in turn, others can also react and comment to these "share
 and vent/share to others, regardless if you know them or not. 
 
 <h4>Technology Used: </h4>
-The app itself was made using NodeJS, AngularJS, and MaterializeCSS.
+The app itself was made using NodeJS, MongoDB, AngularJS, and MaterializeCSS.
 
 <h4>Future Work: </h4>
 I want to possibly add users, so that people have the choice to post anonymously or not. Also, I am still deciding on if I want alternating colors
